@@ -62,6 +62,26 @@ FUNC_DICT_MALE = _get_func(K_B_DICT_MALE)
 
 FUNC_DICT_FEMALE = _get_func(K_B_DICT_FEMALE)
 
+BREAK_DICT = {
+    "Head": [None],
+    "Neck": [None],
+    "Chest": [None],
+    "Back": [None],
+    "Pelvis": [None],
+    "LShoulder": [None],
+    "LArm": [None],
+    "LHand": [None],
+    "RShoulder": [None],
+    "RArm": [None],
+    "RHand": [None],
+    "LThigh": [None],
+    "LLeg": [0.470],
+    "LFoot": [0.304, 1.382],
+    "RThigh": [None],
+    "RLeg": [0.470],
+    "RFoot": [0.304, 1.382]
+}
+
 
 pwl_coeff_dict = {
     'head': {'k': 0, 'b': 0.13},
