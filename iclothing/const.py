@@ -2,6 +2,67 @@
 
 body_part_list = ['head', 'chest', 'back', 'pelvis', 'shoulder', 'arm', 'hand', 'thigh', 'leg', 'foot']
 
+
+def _get_func(k_b_dict):
+    func_dict = {}
+    for body_name, k_b in k_b_dict.items():
+        func_list = [lambda x: k * x + b for k, b in k_b]
+        func_dict[body_name] = func_list
+    return func_dict
+
+
+BODY_NAMES = [
+    "Head", "Neck", "Chest", "Back", "Pelvis",
+    "LShoulder", "LArm", "LHand",
+    "RShoulder", "RArm", "RHand",
+    "LThigh", "LLeg", "LFoot",
+    "RThigh", "RLeg", "RFoot"]
+
+K_B_DICT_MALE = {  # [(k1, b1), (k2, b2), ...]
+    "Head": [(0, 0.13)],
+    "Neck": [(0, 0)],
+    "Chest": [(3.212, -0.962)],
+    "Back": [(1.726, -0.276)],
+    "Pelvis": [(0.977, 0.591)],
+    "LShoulder": [(1.941, -0.632)],
+    "LArm": [(1.580, -0.658)],
+    "LHand": [(0, 0)],
+    "RShoulder": [(1.941, -0.632)],
+    "RArm": [(1.580, -0.658)],
+    "RHand": [(0, 0)],
+    "LThigh": [(0.684, 0.269)],
+    "LLeg": [(2.656, 0.570), (-0.754, 0.226)],
+    "LFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)],
+    "RThigh": [(0.684, 0.269)],
+    "RLeg": [(2.656, 0.570), (-0.754, 0.226)],
+    "RFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)]
+}
+
+K_B_DICT_FEMALE = {  # [(k1, b1), (k2, b2), ...]
+    "Head": [(0, 0.13)],
+    "Neck": [(0, 0)],
+    "Chest": [(3.120, -0.748)],
+    "Back": [(1.671, -0.263)],
+    "Pelvis": [(0.986, 0.571)],
+    "LShoulder": [(2.030, -0.817)],
+    "LArm": [(1.562, -0.700)],
+    "LHand": [(0, 0)],
+    "RShoulder": [(2.030, -0.817)],
+    "RArm": [(1.562, -0.700)],
+    "RHand": [(0, 0)],
+    "LThigh": [(0.684, 0.269)],
+    "LLeg": [(2.656, 0.570), (-0.754, 0.226)],
+    "LFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)],
+    "RThigh": [(0.684, 0.269)],
+    "RLeg": [(2.656, 0.570), (-0.754, 0.226)],
+    "RFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)]
+}
+
+FUNC_DICT_MALE = _get_func(K_B_DICT_MALE)
+
+FUNC_DICT_FEMALE = _get_func(K_B_DICT_FEMALE)
+
+
 pwl_coeff_dict = {
     'head': {'k': 0, 'b': 0.13},
     'chest-male': {'k': 3.212, 'b': -0.962},
@@ -74,3 +135,7 @@ bsa_coeff_dict = {
     'leg': 0.121,
     'foot': 0.057
 }
+
+
+if __name__ == '__main__':
+    pass

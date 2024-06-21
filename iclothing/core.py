@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from scr.const import body_part_list, pwl_coeff_dict, lower_limit_dict_male, lower_limit_dict_female, log_coeff_dict
+from iclothing.const import body_part_list, pwl_coeff_dict, lower_limit_dict_male, lower_limit_dict_female, log_coeff_dict
 
 
 def pwl1(X, k, b):
