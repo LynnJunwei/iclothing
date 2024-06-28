@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from typing import Optional
 
 from iclothing.const import PWL_DICT_MALE, PWL_DICT_FEMALE, LOWER_LIMIT_DICT_MALE, LOWER_LIMIT_DICT_FEMALE, WIND_CORR_DICT
 
 
-def log(X, a, b):
-    return a * np.log(X) + b
-
-
-def get_vr(met, va=0.1):
+def get_vr(met: float, va: float = 0.1):
     vr = va
     if met < 1:
         vr = va
@@ -22,7 +19,7 @@ def get_vr(met, va=0.1):
     return vr
 
 
-def _get_icl_i(icl, pwl, lower_limit):
+def _get_icl_i(icl: Optional[list, np.array, float], pwl, lower_limit):
     icl_i = pwl(np.array(icl))
     icl_i = np.maximum(icl_i, lower_limit)
     return np.round(icl_i, decimals=3)
