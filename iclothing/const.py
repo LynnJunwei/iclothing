@@ -38,6 +38,15 @@ def _get_pwl(func_dict, cond_func_dict):
     return pwl_dict
 
 
+def _get_wind_corr_func(a_b_dict):
+    wind_corr_dict = {}
+    for body_name, a_b in a_b_dict.items():
+        def wind_corr_func(x, a=a_b[0], b=a_b[1]):
+            return a * np.log(x) + b
+        wind_corr_dict[body_name] = wind_corr_func
+    return wind_corr_dict
+
+
 BODY_NAMES = [
     "Head", "Neck", "Chest", "Back", "Pelvis",
     "LShoulder", "LArm", "LHand",
@@ -154,6 +163,28 @@ LOWER_LIMIT_DICT_FEMALE = {
     "RLeg": 0,
     "RFoot": 0.41
 }
+
+A_B_DICT = {
+    "Head": (-0.233, 0.625),
+    "Neck": (0, 1),
+    "Chest": (-0.120, 0.807),
+    "Back": (-0.089, 0.856),
+    "Pelvis": (-0.092, 0.852),
+    "LShoulder": (-0.137, 0.780),
+    "LArm": (-0.128, 0.794),
+    "LHand": (0, 1),
+    "RShoulder": (-0.137, 0.780),
+    "RArm": (-0.128, 0.794),
+    "RHand": (0, 1),
+    "LThigh": (-0.116, 0.814),
+    "LLeg": (-0.089, 0.857),
+    "LFoot": (-0.054, 0.913),
+    "RThigh": (-0.116, 0.814),
+    "RLeg": (-0.089, 0.857),
+    "RFoot": (-0.054, 0.913)
+}
+
+WIND_CORR_DICT = _get_wind_corr_func(A_B_DICT)
 
 BSA_DICT = {
     "Head": 0.100,
