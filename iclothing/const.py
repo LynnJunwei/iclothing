@@ -1,14 +1,41 @@
 # -*- coding: utf-8 -*-
-
-body_part_list = ['head', 'chest', 'back', 'pelvis', 'shoulder', 'arm', 'hand', 'thigh', 'leg', 'foot']
+import numpy as np
 
 
 def _get_func(k_b_dict):
     func_dict = {}
-    for body_name, k_b in k_b_dict.items():
-        func_list = [lambda x: k * x + b for k, b in k_b]
+    for body_name, k_b_list in k_b_dict.items():
+        func_list = [lambda x, k=k_b[0], b=k_b[1]: k * x + b for k_b in k_b_list]
         func_dict[body_name] = func_list
     return func_dict
+
+
+def _get_cond_func(break_dict):
+    cond_dict = {}
+    for body_name, break_list in break_dict.items():
+        if len(break_list) == 1 and break_list[0] is None:
+            cond_list = [lambda x: np.ones_like(x)]
+        elif len(break_list) == 1:
+            cond_list = [lambda x: x < break_list[0],
+                         lambda x: x >= break_list[0]]
+        else:
+            cond_list = ([lambda x: x < break_list[0]] +
+                         [lambda x: (x >= break_list[i]) & (x < break_list[i+1]) for i in range(len(break_list)-1)] +
+                         [lambda x: x >= break_list[1]])
+        cond_dict[body_name] = cond_list
+    return cond_dict
+
+
+def _get_pwl(func_dict, cond_func_dict):
+    pwl_dict = {}
+    for body_name in BODY_NAMES:
+        func_list = func_dict[body_name]
+        cond_func_list = cond_func_dict[body_name]
+
+        def pwl(x, _cond_func_list=cond_func_list, _func_list=func_list):
+            return np.piecewise(x, [cond_func(x) for cond_func in _cond_func_list], _func_list)
+        pwl_dict[body_name] = pwl
+    return pwl_dict
 
 
 BODY_NAMES = [
@@ -31,11 +58,11 @@ K_B_DICT_MALE = {  # [(k1, b1), (k2, b2), ...]
     "RArm": [(1.580, -0.658)],
     "RHand": [(0, 0)],
     "LThigh": [(0.684, 0.269)],
-    "LLeg": [(2.656, 0.570), (-0.754, 0.226)],
-    "LFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)],
+    "LLeg": [(2.656, -0.754), (0.570, 0.226)],
+    "LFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)],
     "RThigh": [(0.684, 0.269)],
-    "RLeg": [(2.656, 0.570), (-0.754, 0.226)],
-    "RFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)]
+    "RLeg": [(2.656, -0.754), (0.570, 0.226)],
+    "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
 }
 
 K_B_DICT_FEMALE = {  # [(k1, b1), (k2, b2), ...]
@@ -51,11 +78,11 @@ K_B_DICT_FEMALE = {  # [(k1, b1), (k2, b2), ...]
     "RArm": [(1.562, -0.700)],
     "RHand": [(0, 0)],
     "LThigh": [(0.684, 0.269)],
-    "LLeg": [(2.656, 0.570), (-0.754, 0.226)],
-    "LFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)],
+    "LLeg": [(2.656, -0.754), (0.570, 0.226)],
+    "LFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)],
     "RThigh": [(0.684, 0.269)],
-    "RLeg": [(2.656, 0.570), (-0.754, 0.226)],
-    "RFoot": [(4.473, 0.117), (1.326, 1.246), (-0.236, 0.304)]
+    "RLeg": [(2.656, -0.754), (0.570, 0.226)],
+    "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
 }
 
 FUNC_DICT_MALE = _get_func(K_B_DICT_MALE)
@@ -82,80 +109,80 @@ BREAK_DICT = {
     "RFoot": [0.304, 1.382]
 }
 
+COND_FUNC_DICT = _get_cond_func(BREAK_DICT)
 
-pwl_coeff_dict = {
-    'head': {'k': 0, 'b': 0.13},
-    'chest-male': {'k': 3.212, 'b': -0.962},
-    'chest-female': {'k': 3.120, 'b': -0.748},
-    'back-male': {'k': 1.726, 'b': -0.276},
-    'back-female': {'k': 1.671, 'b': -0.263},
-    'pelvis-male': {'k': 0.977, 'b': 0.591},
-    'pelvis-female': {'k': 0.986, 'b': 0.571},
-    'shoulder-male': {'k': 1.941, 'b': -0.632},
-    'shoulder-female': {'k': 2.030, 'b': -0.817},
-    'arm-male': {'k': 1.580, 'b': -0.658},
-    'arm-female': {'k': 1.562, 'b': -0.700},
-    'hand': {'k': 0, 'b': 0},
+PWL_DICT_MALE = _get_pwl(FUNC_DICT_MALE, COND_FUNC_DICT)
 
-    'thigh': {'k': 0.684, 'b': 0.269},
-    'leg': {'k1': 2.656, 'b1': -0.754, 'k2': 0.570, 'b2': 0.226, 'x1': 0.470},
-    'foot': {'k1': 4.473, 'b1': 0, 'k2': 0.117, 'b2': 1.326, 'k3': 1.246, 'b3': -0.236, 'x1': 0.304, 'x2': 1.382}
+PWL_DICT_FEMALE = _get_pwl(FUNC_DICT_FEMALE, COND_FUNC_DICT)
+
+LOWER_LIMIT_DICT_MALE = {
+    "Head": 0,
+    "Neck": 0,
+    "Chest": 0.35,
+    "Back": 0.27,
+    "Pelvis": 0.91,
+    "LShoulder": 0.42,
+    "LArm": 0,
+    "LHand": 0,
+    "RShoulder": 0.42,
+    "RArm": 0,
+    "RHand": 0,
+    "LThigh": 0.48,
+    "LLeg": 0,
+    "LFoot": 0.41,
+    "RThigh": 0.48,
+    "RLeg": 0,
+    "RFoot": 0.41
 }
 
-lower_limit_dict_female = {
-    'head': 0,
-    'chest': 0.57,
-    'back': 0.27,
-    'pelvis': 0.91,
-    'shoulder': 0.42,
-    'arm': 0,
-    'hand': 0,
-    'thigh': 0.48,
-    'leg': 0,
-    'foot': 0.41
+LOWER_LIMIT_DICT_FEMALE = {
+    "Head": 0,
+    "Neck": 0,
+    "Chest": 0.57,
+    "Back": 0.27,
+    "Pelvis": 0.91,
+    "LShoulder": 0.42,
+    "LArm": 0,
+    "LHand": 0,
+    "RShoulder": 0.42,
+    "RArm": 0,
+    "RHand": 0,
+    "LThigh": 0.48,
+    "LLeg": 0,
+    "LFoot": 0.41,
+    "RThigh": 0.48,
+    "RLeg": 0,
+    "RFoot": 0.41
 }
 
-
-lower_limit_dict_male = {
-    'head': 0,
-    'chest': 0.35,
-    'back': 0.27,
-    'pelvis': 0.91,
-    'shoulder': 0,
-    'arm': 0,
-    'hand': 0,
-    'thigh': 0.48,
-    'leg': 0,
-    'foot': 0.41
+BSA_DICT = {
+    "Head": 0.100,
+    "Neck": 0,
+    "Chest": 0.144,
+    "Back": 0.133,
+    "Pelvis": 0.182,
+    "LShoulder": 0.073,
+    "LArm": 0.052,
+    "LHand": 0.0375,
+    "RShoulder": 0.073,
+    "RArm": 0.052,
+    "RHand": 0.0375,
+    "LThigh": 0.1625,
+    "LLeg": 0.089,
+    "LFoot": 0.042,
+    "RThigh": 0.1625,
+    "RLeg": 0.089,
+    "RFoot": 0.042
 }
 
-log_coeff_dict = {
-    'head': {'a': -0.233, 'b': 0.625},
-    'chest': {'a': -0.120, 'b': 0.807},
-    'back': {'a': -0.089, 'b': 0.856},
-    'pelvis': {'a': -0.092, 'b': 0.852},
-    'shoulder': {'a': -0.137, 'b': 0.780},
-    'arm': {'a': -0.128, 'b': 0.794},
-    'hand': {'a': 0, 'b': 1},
-    'thigh': {'a': -0.116, 'b': 0.814},
-    'leg': {'a': -0.089, 'b': 0.857},
-    'foot': {'a': -0.054, 'b': 0.913},
-    'overall': {'a': -0.116, 'b': 0.813}
-}
+BSA_TOTAL = sum(list(BSA_DICT.values()))
 
-bsa_coeff_dict = {
-    'head': 0.068,
-    'chest': 0.098,
-    'back': 0.090,
-    'pelvis': 0.124,
-    'shoulder': 0.099,
-    'arm': 0.071,
-    'hand': 0.051,
-    'thigh': 0.221,
-    'leg': 0.121,
-    'foot': 0.057
-}
+BSA_RATIO_DICT = {body_name: np.round(bsa/BSA_TOTAL, decimals=3)
+                  for body_name, bsa in BSA_DICT.items()}
 
 
 if __name__ == '__main__':
-    pass
+    np.set_printoptions(suppress=True)
+    print({body_name: pwl(0.6) for body_name, pwl in PWL_DICT_FEMALE.items()})
+    print({body_name: np.round(pwl(np.array([0.3, 0.6, 1])), decimals=3) for body_name, pwl in PWL_DICT_MALE.items()})
+    print(BSA_RATIO_DICT)
