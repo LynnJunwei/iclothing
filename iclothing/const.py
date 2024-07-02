@@ -15,13 +15,11 @@ def _get_cond_func(break_dict):
     for body_name, break_list in break_dict.items():
         if len(break_list) == 1 and break_list[0] is None:
             cond_list = [lambda x: np.ones_like(x)]
-        elif len(break_list) == 1:
-            cond_list = [lambda x: x < break_list[0],
-                         lambda x: x >= break_list[0]]
         else:
-            cond_list = ([lambda x: x < break_list[0]] +
-                         [lambda x: (x >= break_list[i]) & (x < break_list[i+1]) for i in range(len(break_list)-1)] +
-                         [lambda x: x >= break_list[1]])
+            breaks_lower = [float('-inf')] + break_list
+            breaks_upper = break_list + [float('inf')]
+            cond_list = [lambda x, lower=break_lower, upper=break_upper: (lower <= x) & (x < upper)
+                         for break_lower, break_upper in zip(breaks_lower, breaks_upper)]
         cond_dict[body_name] = cond_list
     return cond_dict
 
