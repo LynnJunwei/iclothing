@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import numpy as np
 
 
@@ -128,10 +130,10 @@ LOWER_LIMIT_DICT_MALE = {
     "Chest": 0.35,
     "Back": 0.27,
     "Pelvis": 0.91,
-    "LShoulder": 0.42,
+    "LShoulder": 0,
     "LArm": 0,
     "LHand": 0,
-    "RShoulder": 0.42,
+    "RShoulder": 0,
     "RArm": 0,
     "RHand": 0,
     "LThigh": 0.48,
@@ -148,10 +150,10 @@ LOWER_LIMIT_DICT_FEMALE = {
     "Chest": 0.57,
     "Back": 0.27,
     "Pelvis": 0.91,
-    "LShoulder": 0.42,
+    "LShoulder": 0,
     "LArm": 0,
     "LHand": 0,
-    "RShoulder": 0.42,
+    "RShoulder": 0,
     "RArm": 0,
     "RHand": 0,
     "LThigh": 0.48,
