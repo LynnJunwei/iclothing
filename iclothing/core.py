@@ -13,19 +13,25 @@ def get_vr(met: float, va: float = 0.1) -> float:
     Calculate relative air velocity.
 
     Relative air velocity is the sum of absolute air velocity and the walking speed, following the equation:
-        .. math:: v_r = v_a + v_w
+
+    .. math:: v_r = v_a + v_w
 
     For low metabolic rate (met < 1) which indicates behaviors without body movement, the walking speed is equal to 0:
-        .. math:: v_w = 0
+
+    .. math:: v_w = 0
 
     For less-defined activities (e.g. conveyor belt work) (1 <= met < 1.2), the walking speed could be calculated using:
-        .. math:: v_w= 0.3 \\times (met-1)
+
+    .. math:: v_w= 0.3 \\times (met-1)
 
     For walking (met >= 2), the walking speed could be estimated using:
-        .. math:: v_w = 0.5 \\times met - 0.1
 
-    For other activities (1.2 <= met < 2), the walking speed could be calculated by interpolation of walking speeds for less-defined activities and walking:
-        .. math:: v_w = 0.25 \\times (met^2 + met - 2.4)
+    .. math:: v_w = 0.5 \\times met - 0.1
+
+    For other activities (1.2 <= met < 2), the walking speed could be calculated by interpolation of walking speeds for
+    less-defined activities and walking:
+
+    .. math:: v_w = 0.25 \\times (met^2 + met - 2.4)
 
     Args:
         met: A number of metabolic rate (in met).
@@ -68,7 +74,7 @@ def _get_icl_i(icl: list | np.ndarray | float,
 def get_icl_dict(icl: list | np.ndarray | float,
                  sex: Literal["male", "female"],
                  met: float = 1.0,
-                 va: float = 0.1):
+                 va: float = 0.1) -> dict:
     """
     Get local clothing insulation for each body part.
 
