@@ -1,0 +1,7 @@
+iclothing.core
+=================
+
+.. automodule:: iclothing.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
