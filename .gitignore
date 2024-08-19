@@ -7,3 +7,6 @@ test/
 *.egg-info
 dist
 build
+
+# docstrings
+source
