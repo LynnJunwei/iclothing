@@ -38,19 +38,11 @@ def get_icl_dict(icl, sex, met=1.0, va=0.1):
 
     vr = get_vr(met, va)
     if vr > 0.2:
-        icl_dict = {body_name: icl_i * WIND_CORR_DICT[body_name](vr)
+        icl_dict = {body_name: (icl_i * WIND_CORR_DICT[body_name](vr))
                     for body_name, icl_i in icl_dict.items()}
 
-    return icl_dict
+    return {body_name: icl_i.astype(type('float', (float,), {})) for body_name, icl_i in icl_dict.items()}
 
 
 if __name__ == '__main__':
-    import pandas as pd
-    icl = [0.3, 0.37, 0.5, 1]
-    icli = get_icl_dict(icl, 'female', 1)
-    icli = pd.DataFrame.from_dict(icli, orient='index', columns=icl)
-    print(icli)
-
-    icli = get_icl_dict(icl, 'female', 2)
-    icli = pd.DataFrame.from_dict(icli, orient='index', columns=icl)
-    print(icli)
+    pass

@@ -213,7 +213,4 @@ BSA_RATIO_DICT = {body_name: np.round(bsa/BSA_TOTAL, decimals=3)
 
 
 if __name__ == '__main__':
-    np.set_printoptions(suppress=True)
-    print({body_name: pwl(0.6) for body_name, pwl in PWL_DICT_FEMALE.items()})
-    print({body_name: np.round(pwl(np.array([0.3, 0.6, 1])), decimals=3) for body_name, pwl in PWL_DICT_MALE.items()})
-    print(BSA_RATIO_DICT)
+    pass

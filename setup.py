@@ -10,21 +10,21 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'iclothing'
-DESCRIPTION = 'My short description for my project.'
-URL = 'https://github.com/me/myproject'
+DESCRIPTION = 'Package to obtain local clothing insulation for overall clothing insulation.'
+URL = 'junwei.lin@connect.polyu.hk'
 EMAIL = 'me@example.com'
-AUTHOR = 'Awesome Soul'
+AUTHOR = 'LIN Junwei'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    # 'requests', 'maya', 'records',
+    "numpy",
 ]
 
 # What packages are optional?
 EXTRAS = {
-    # 'fancy feature': ['django'],
+    "pandas"
 }
 
 # The rest you shouldn't have to touch too much :)
