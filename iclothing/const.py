@@ -34,6 +34,7 @@ def _get_pwl(func_dict, cond_func_dict):
 
         def pwl(x, _cond_func_list=cond_func_list, _func_list=func_list):
             return np.piecewise(x, [cond_func(x) for cond_func in _cond_func_list], _func_list)
+
         pwl_dict[body_name] = pwl
     return pwl_dict
 
@@ -43,6 +44,7 @@ def _get_wind_corr_func(a_b_dict):
     for body_name, a_b in a_b_dict.items():
         def wind_corr_func(x, a=a_b[0], b=a_b[1]):
             return a * np.log(x) + b
+
         wind_corr_dict[body_name] = wind_corr_func
     return wind_corr_dict
 
@@ -128,10 +130,22 @@ _COND_FUNC_DICT: dict = _get_cond_func(_BREAK_DICT)
 """Dictionary of conditional functions for piecewise functions."""
 
 PWL_DICT_MALE: dict = _get_pwl(_FUNC_DICT_MALE, _COND_FUNC_DICT)
-"""Dictionary of piecewise functions for male."""
+"""
+Dictionary of piecewise functions for male.
+
+Examples:
+    >>> from iclothing.const import PWL_DICT_MALE
+    >>> icl_dict = {body_name: pwl(0.3) for body_name, pwl in PWL_DICT_MALE.items()}
+"""
 
 PWL_DICT_FEMALE: dict = _get_pwl(_FUNC_DICT_FEMALE, _COND_FUNC_DICT)
-"""Dictionary of piecewise functions for female."""
+"""
+Dictionary of piecewise functions for female.
+
+Examples:
+    >>> from iclothing.const import PWL_DICT_FEMALE
+    >>> icl_dict = {body_name: pwl(0.3) for body_name, pwl in PWL_DICT_MALE.items()}
+"""
 
 LOWER_LIMIT_DICT_MALE: dict = {
     "Head": 0,
@@ -197,7 +211,15 @@ _A_B_DICT: dict = {
 """Dictionary of a and b values of wind correction functions."""
 
 WIND_CORR_DICT: dict = _get_wind_corr_func(_A_B_DICT)
-"""Dictionary of wind correction functions."""
+"""
+Dictionary of wind correction functions.
+
+Examples:
+    >>> from iclothing.const import WIND_CORR_DICT
+    >>> vr = 0.3
+    >>> icl_dict = get_icl_dict(0.3)
+    >>> icl_dict_corr = {body_name: (icl_i * WIND_CORR_DICT[body_name](vr) for body_name, icl_i in icl_dict.items()}
+"""
 
 BSA_DICT: dict = {
     "Head": 0.100,
@@ -218,14 +240,14 @@ BSA_DICT: dict = {
     "RLeg": 0.089,
     "RFoot": 0.042
 }
-"""Dictionary of body surface area (in m^2)."""
+"""Dictionary of body surface area (in m\\ :sup:`2`)."""
 
 BSA_TOTAL: float = sum(list(BSA_DICT.values()))
-"""Total body surface area (in m^2)."""
+"""Total body surface area (in m\\ :sup:`2`)."""
 
-BSA_RATIO_DICT: dict = {body_name: np.round(bsa/BSA_TOTAL, decimals=3) for body_name, bsa in BSA_DICT.items()}
+BSA_RATIO_DICT: dict = {body_name: np.round(bsa / BSA_TOTAL, decimals=3).astype(type('float', (float,), {}))
+                        for body_name, bsa in BSA_DICT.items()}
 """Dictionary of body surface area ratio."""
-
 
 if __name__ == '__main__':
     pass

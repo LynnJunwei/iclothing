@@ -1,3 +1,11 @@
+iclothing.const
+=================
+
+.. automodule:: iclothing.const
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 iclothing.core
 =================
 
