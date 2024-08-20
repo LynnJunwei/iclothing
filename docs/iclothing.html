@@ -85,7 +85,7 @@
 <span id="iclothing-core"></span><h1>iclothing.core<a class="headerlink" href="#module-iclothing.core" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="iclothing.core.get_icl_dict">
-<span class="sig-prename descclassname"><span class="pre">iclothing.core.</span></span><span class="sig-name descname"><span class="pre">get_icl_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">icl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">met</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iclothing.core.get_icl_dict" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">iclothing.core.</span></span><span class="sig-name descname"><span class="pre">get_icl_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">icl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">met</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#iclothing.core.get_icl_dict" title="Link to this definition"></a></dt>
 <dd><p>Get local clothing insulation for each body part.</p>
 <p>The calculation models are based on the following papers:</p>
 <dl class="field-list simple">
@@ -114,23 +114,22 @@
 <dt class="sig sig-object py" id="iclothing.core.get_vr">
 <span class="sig-prename descclassname"><span class="pre">iclothing.core.</span></span><span class="sig-name descname"><span class="pre">get_vr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">met</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#iclothing.core.get_vr" title="Link to this definition"></a></dt>
 <dd><p>Calculate relative air velocity.</p>
-<dl>
-<dt>Relative air velocity is the sum of absolute air velocity and the walking speed, following the equation:</dt><dd><div class="math notranslate nohighlight">
+<p>Relative air velocity is the sum of absolute air velocity and the walking speed, following the equation:</p>
+<div class="math notranslate nohighlight">
 \[v_r = v_a + v_w\]</div>
-</dd>
-<dt>For low metabolic rate (met &lt; 1) which indicates behaviors without body movement, the walking speed is equal to 0:</dt><dd><div class="math notranslate nohighlight">
+<p>For low metabolic rate (met &lt; 1) which indicates behaviors without body movement, the walking speed is equal to 0:</p>
+<div class="math notranslate nohighlight">
 \[v_w = 0\]</div>
-</dd>
-<dt>For less-defined activities (e.g. conveyor belt work) (1 &lt;= met &lt; 1.2), the walking speed could be calculated using:</dt><dd><div class="math notranslate nohighlight">
+<p>For less-defined activities (e.g. conveyor belt work) (1 &lt;= met &lt; 1.2), the walking speed could be calculated using:</p>
+<div class="math notranslate nohighlight">
 \[v_w= 0.3 \times (met-1)\]</div>
-</dd>
-<dt>For walking (met &gt;= 2), the walking speed could be estimated using:</dt><dd><div class="math notranslate nohighlight">
+<p>For walking (met &gt;= 2), the walking speed could be estimated using:</p>
+<div class="math notranslate nohighlight">
 \[v_w = 0.5 \times met - 0.1\]</div>
-</dd>
-<dt>For other activities (1.2 &lt;= met &lt; 2), the walking speed could be calculated by interpolation of walking speeds for less-defined activities and walking:</dt><dd><div class="math notranslate nohighlight">
+<p>For other activities (1.2 &lt;= met &lt; 2), the walking speed could be calculated by interpolation of walking speeds for
+less-defined activities and walking:</p>
+<div class="math notranslate nohighlight">
 \[v_w = 0.25 \times (met^2 + met - 2.4)\]</div>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
