@@ -24,7 +24,7 @@ REQUIRED = [
 
 # What packages are optional?
 EXTRAS = {
-    "pandas"
+    # "for example": ["pandas"]
 }
 
 # The rest you shouldn't have to touch too much :)
