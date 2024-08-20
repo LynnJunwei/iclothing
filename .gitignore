@@ -10,3 +10,5 @@ build
 
 # docstrings
 source
+Makefile
+make.bat
