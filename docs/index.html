@@ -75,9 +75,63 @@
              
   <section id="iclothing-documentation">
 <h1>iclothing documentation<a class="headerlink" href="#iclothing-documentation" title="Link to this heading"></a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
+<section id="iclothing">
+<h2>iclothing<a class="headerlink" href="#iclothing" title="Link to this heading"></a></h2>
+<p>iclothing is a Python package to obtain local clothing insulation for overall clothing insulation.</p>
+<p>Please cite us if you use this package:</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>iclothing
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://lynnjunwei.github.io/iclothing/index.html">https://lynnjunwei.github.io/iclothing/index.html</a></p>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>numpy</p></li>
+</ul>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Link to this heading"></a></h3>
+<p>GNU General Public License v3.0</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iclothing</span>
+
+<span class="n">icl</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">icli</span> <span class="o">=</span> <span class="n">iclothing</span><span class="o">.</span><span class="n">get_icl_dict</span><span class="p">(</span><span class="n">icl</span><span class="o">=</span><span class="n">icl</span><span class="p">,</span> <span class="n">sex</span><span class="o">=</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="n">met</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">icli</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;Head&#39;</span><span class="p">:</span> <span class="mf">0.13</span><span class="p">,</span>
+    <span class="s1">&#39;Neck&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;Chest&#39;</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span>
+    <span class="s1">&#39;Back&#39;</span><span class="p">:</span> <span class="mf">0.27</span><span class="p">,</span>
+    <span class="s1">&#39;Pelvis&#39;</span><span class="p">:</span> <span class="mf">0.91</span><span class="p">,</span>
+    <span class="s1">&#39;LShoulder&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;LArm&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;LHand&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;RShoulder&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;RArm&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;RHand&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;LThigh&#39;</span><span class="p">:</span> <span class="mf">0.48</span><span class="p">,</span>
+    <span class="s1">&#39;LLeg&#39;</span><span class="p">:</span> <span class="mf">0.043</span><span class="p">,</span>
+    <span class="s1">&#39;LFoot&#39;</span><span class="p">:</span> <span class="mf">1.342</span><span class="p">,</span>
+    <span class="s1">&#39;RThigh&#39;</span><span class="p">:</span> <span class="mf">0.48</span><span class="p">,</span>
+    <span class="s1">&#39;RLeg&#39;</span><span class="p">:</span> <span class="mf">0.043</span><span class="p">,</span>
+    <span class="s1">&#39;RFoot&#39;</span><span class="p">:</span> <span class="mf">1.342</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>

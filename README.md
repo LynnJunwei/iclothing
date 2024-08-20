@@ -31,7 +31,7 @@ GNU General Public License v3.0
 Example
 -----
 
-```python
+```{code-block} python
 import iclothing
 
 icl = 0.3
