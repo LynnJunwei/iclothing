@@ -12,6 +12,11 @@ Installation
 pip install iclothing
 ```
 
+Documentation
+-----
+
+<https://lynnjunwei.github.io/iclothing/index.html>
+
 Dependencies
 -----
 
