@@ -47,14 +47,15 @@ def _get_wind_corr_func(a_b_dict):
     return wind_corr_dict
 
 
-BODY_NAMES = [
+BODY_NAMES: list = [
     "Head", "Neck", "Chest", "Back", "Pelvis",
     "LShoulder", "LArm", "LHand",
     "RShoulder", "RArm", "RHand",
     "LThigh", "LLeg", "LFoot",
     "RThigh", "RLeg", "RFoot"]
+"""List of body names."""
 
-K_B_DICT_MALE = {  # [(k1, b1), (k2, b2), ...]
+_K_B_DICT_MALE: dict = {  # [(k1, b1), (k2, b2), ...]
     "Head": [(0, 0.13)],
     "Neck": [(0, 0)],
     "Chest": [(3.212, -0.962)],
@@ -73,8 +74,9 @@ K_B_DICT_MALE = {  # [(k1, b1), (k2, b2), ...]
     "RLeg": [(2.656, -0.754), (0.570, 0.226)],
     "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
 }
+"""Dictionary of k and b values of piecewise functions for male."""
 
-K_B_DICT_FEMALE = {  # [(k1, b1), (k2, b2), ...]
+_K_B_DICT_FEMALE: dict = {  # [(k1, b1), (k2, b2), ...]
     "Head": [(0, 0.13)],
     "Neck": [(0, 0)],
     "Chest": [(3.120, -0.748)],
@@ -93,12 +95,15 @@ K_B_DICT_FEMALE = {  # [(k1, b1), (k2, b2), ...]
     "RLeg": [(2.656, -0.754), (0.570, 0.226)],
     "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
 }
+"""Dictionary of k and b values of piecewise functions for female."""
 
-FUNC_DICT_MALE = _get_func(K_B_DICT_MALE)
+_FUNC_DICT_MALE: dict = _get_func(_K_B_DICT_MALE)
+"""Dictionary of functions for piecewise functions for male."""
 
-FUNC_DICT_FEMALE = _get_func(K_B_DICT_FEMALE)
+_FUNC_DICT_FEMALE: dict = _get_func(_K_B_DICT_FEMALE)
+"""Dictionary of functions for piecewise functions for female."""
 
-BREAK_DICT = {
+_BREAK_DICT: dict = {
     "Head": [None],
     "Neck": [None],
     "Chest": [None],
@@ -117,14 +122,18 @@ BREAK_DICT = {
     "RLeg": [0.470],
     "RFoot": [0.304, 1.382]
 }
+"""Dictionary of break points for piecewise functions."""
 
-COND_FUNC_DICT = _get_cond_func(BREAK_DICT)
+_COND_FUNC_DICT: dict = _get_cond_func(_BREAK_DICT)
+"""Dictionary of conditional functions for piecewise functions."""
 
-PWL_DICT_MALE = _get_pwl(FUNC_DICT_MALE, COND_FUNC_DICT)
+PWL_DICT_MALE: dict = _get_pwl(_FUNC_DICT_MALE, _COND_FUNC_DICT)
+"""Dictionary of piecewise functions for male."""
 
-PWL_DICT_FEMALE = _get_pwl(FUNC_DICT_FEMALE, COND_FUNC_DICT)
+PWL_DICT_FEMALE: dict = _get_pwl(_FUNC_DICT_FEMALE, _COND_FUNC_DICT)
+"""Dictionary of piecewise functions for female."""
 
-LOWER_LIMIT_DICT_MALE = {
+LOWER_LIMIT_DICT_MALE: dict = {
     "Head": 0,
     "Neck": 0,
     "Chest": 0.35,
@@ -143,8 +152,9 @@ LOWER_LIMIT_DICT_MALE = {
     "RLeg": 0,
     "RFoot": 0.41
 }
+"""Dictionary of lower limits of local clothing insulation for male."""
 
-LOWER_LIMIT_DICT_FEMALE = {
+LOWER_LIMIT_DICT_FEMALE: dict = {
     "Head": 0,
     "Neck": 0,
     "Chest": 0.57,
@@ -163,8 +173,9 @@ LOWER_LIMIT_DICT_FEMALE = {
     "RLeg": 0,
     "RFoot": 0.41
 }
+"""Dictionary of lower limits of local clothing insulation for female."""
 
-A_B_DICT = {
+_A_B_DICT: dict = {
     "Head": (-0.233, 0.625),
     "Neck": (0, 1),
     "Chest": (-0.120, 0.807),
@@ -183,10 +194,12 @@ A_B_DICT = {
     "RLeg": (-0.089, 0.857),
     "RFoot": (-0.054, 0.913)
 }
+"""Dictionary of a and b values of wind correction functions."""
 
-WIND_CORR_DICT = _get_wind_corr_func(A_B_DICT)
+WIND_CORR_DICT: dict = _get_wind_corr_func(_A_B_DICT)
+"""Dictionary of wind correction functions."""
 
-BSA_DICT = {
+BSA_DICT: dict = {
     "Head": 0.100,
     "Neck": 0,
     "Chest": 0.144,
@@ -205,11 +218,13 @@ BSA_DICT = {
     "RLeg": 0.089,
     "RFoot": 0.042
 }
+"""Dictionary of body surface area (in m^2)."""
 
-BSA_TOTAL = sum(list(BSA_DICT.values()))
+BSA_TOTAL: float = sum(list(BSA_DICT.values()))
+"""Total body surface area (in m^2)."""
 
-BSA_RATIO_DICT = {body_name: np.round(bsa/BSA_TOTAL, decimals=3)
-                  for body_name, bsa in BSA_DICT.items()}
+BSA_RATIO_DICT: dict = {body_name: np.round(bsa/BSA_TOTAL, decimals=3) for body_name, bsa in BSA_DICT.items()}
+"""Dictionary of body surface area ratio."""
 
 
 if __name__ == '__main__':
