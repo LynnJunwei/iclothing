@@ -57,169 +57,172 @@ BODY_NAMES: list = [
     "RThigh", "RLeg", "RFoot"]
 """List of body names."""
 
-_K_B_DICT_MALE: dict = {  # [(k1, b1), (k2, b2), ...]
+_K_B_DICT_GENERIC: dict = {  # [(k1, b1), (k2, b2), ...]
     "Head": [(0, 0.13)],
     "Neck": [(0, 0)],
-    "Chest": [(3.212, -0.962)],
-    "Back": [(1.726, -0.276)],
-    "Pelvis": [(0.977, 0.591)],
-    "LShoulder": [(1.941, -0.632)],
-    "LArm": [(1.580, -0.658)],
+    "Chest": [(2.958, -0.297)],
+    "Back": [(2.483, -0.097), (4.626, -2.347)],
+    "Pelvis": [(2.256, 0.437), (7.047, -4.617)],
+    "LShoulder": [(2.221, -0.459)],
+    "LArm": [(2.492, -0.840)],
     "LHand": [(0, 0)],
-    "RShoulder": [(1.941, -0.632)],
-    "RArm": [(1.580, -0.658)],
+    "RShoulder": [(2.221, -0.459)],
+    "RArm": [(2.492, -0.840)],
     "RHand": [(0, 0)],
-    "LThigh": [(0.684, 0.269)],
-    "LLeg": [(2.656, -0.754), (0.570, 0.226)],
-    "LFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)],
-    "RThigh": [(0.684, 0.269)],
-    "RLeg": [(2.656, -0.754), (0.570, 0.226)],
-    "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
+    "LThigh": [(0.370, 0.507), (1.999, -1.274)],
+    "LLeg": [(2.019, -0.552), (0.758, 0.016)],
+    "LFoot": [(0.693, 0.217), (0.139, 1.146)],
+    "RThigh": [(0.370, 0.507), (1.999, -1.274)],
+    "RLeg": [(2.019, -0.552), (0.758, 0.016)],
+    "RFoot": [(0.693, 0.217), (0.139, 1.146)],
 }
-"""Dictionary of k and b values of piecewise functions for male."""
+"""Dictionary of k and b values of piecewise functions for generic posture (standing and seating)."""
 
-_K_B_DICT_FEMALE: dict = {  # [(k1, b1), (k2, b2), ...]
+_K_B_DICT_STANDING: dict = {  # [(k1, b1), (k2, b2), ...]
     "Head": [(0, 0.13)],
     "Neck": [(0, 0)],
-    "Chest": [(3.120, -0.748)],
-    "Back": [(1.671, -0.263)],
-    "Pelvis": [(0.986, 0.571)],
-    "LShoulder": [(2.030, -0.817)],
-    "LArm": [(1.562, -0.700)],
+    "Chest": [(2.975, -0.540)],
+    "Back": [(3.668, -0.738)],
+    "Pelvis": [(2.706, 0.698), (5.482, -1.846)],
+    "LShoulder": [(2.230, -0.534)],
+    "LArm": [(2.580, -0.907)],
     "LHand": [(0, 0)],
-    "RShoulder": [(2.030, -0.817)],
-    "RArm": [(1.562, -0.700)],
+    "RShoulder": [(2.230, -0.534)],
+    "RArm": [(2.580, -0.907)],
     "RHand": [(0, 0)],
-    "LThigh": [(0.684, 0.269)],
-    "LLeg": [(2.656, -0.754), (0.570, 0.226)],
-    "LFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)],
-    "RThigh": [(0.684, 0.269)],
-    "RLeg": [(2.656, -0.754), (0.570, 0.226)],
-    "RFoot": [(4.473, 0), (0.117, 1.326), (1.246, -0.236)]
+    "LThigh": [(0.752, 0.321), (2.314, -1.849)],
+    "LLeg": [(2.794, -0.825), (0.648, 0.260)],
+    "LFoot": [(0.757, 0.182), (0.092, 1.240)],
+    "RThigh": [(0.752, 0.321), (2.314, -1.849)],
+    "RLeg": [(2.794, -0.825), (0.648, 0.260)],
+    "RFoot": [(0.757, 0.182), (0.092, 1.240)],
 }
-"""Dictionary of k and b values of piecewise functions for female."""
+"""Dictionary of k and b values of piecewise functions for standing posture."""
 
-_FUNC_DICT_MALE: dict = _get_func(_K_B_DICT_MALE)
-"""Dictionary of functions for piecewise functions for male."""
+_FUNC_DICT_GENERIC: dict = _get_func(_K_B_DICT_GENERIC)
+"""Dictionary of functions for piecewise functions for generic posture (standing and seating)."""
 
-_FUNC_DICT_FEMALE: dict = _get_func(_K_B_DICT_FEMALE)
-"""Dictionary of functions for piecewise functions for female."""
+_FUNC_DICT_STANDING: dict = _get_func(_K_B_DICT_STANDING)
+"""Dictionary of functions for piecewise functions for standing posture."""
 
-_BREAK_DICT: dict = {
+_BREAK_DICT_GENERIC: dict = {
     "Head": [None],
     "Neck": [None],
     "Chest": [None],
-    "Back": [None],
-    "Pelvis": [None],
+    "Back": [1.050],
+    "Pelvis": [1.055],
     "LShoulder": [None],
     "LArm": [None],
     "LHand": [None],
     "RShoulder": [None],
     "RArm": [None],
     "RHand": [None],
-    "LThigh": [None],
-    "LLeg": [0.470],
-    "LFoot": [0.304, 1.382],
-    "RThigh": [None],
-    "RLeg": [0.470],
-    "RFoot": [0.304, 1.382]
+    "LThigh": [1.093],
+    "LLeg": [0.450],
+    "LFoot": [1.677],
+    "RThigh": [1.093],
+    "RLeg": [0.450],
+    "RFoot": [1.677],
+}
+
+_BREAK_DICT_STANDING: dict = {
+    "Head": [None],
+    "Neck": [None],
+    "Chest": [None],
+    "Back": [None],
+    "Pelvis": [0.916],
+    "LShoulder": [None],
+    "LArm": [None],
+    "LHand": [None],
+    "RShoulder": [None],
+    "RArm": [None],
+    "RHand": [None],
+    "LThigh": [1.390],
+    "LLeg": [0.505],
+    "LFoot": [1.590],
+    "RThigh": [1.390],
+    "RLeg": [0.505],
+    "RFoot": [1.590],
 }
 """Dictionary of break points for piecewise functions."""
 
-_COND_FUNC_DICT: dict = _get_cond_func(_BREAK_DICT)
-"""Dictionary of conditional functions for piecewise functions."""
+_COND_FUNC_DICT_GENERIC: dict = _get_cond_func(_BREAK_DICT_GENERIC)
+"""Dictionary of conditional functions for piecewise functions for generic posture (standing and seating)."""
 
-PWL_DICT_MALE: dict = _get_pwl(_FUNC_DICT_MALE, _COND_FUNC_DICT)
-"""
-Dictionary of piecewise functions for male.
+_COND_FUNC_DICT_STANDING: dict = _get_cond_func(_BREAK_DICT_STANDING)
+"""Dictionary of conditional functions for piecewise functions for standing posture."""
 
-Examples:
-    >>> from iclothing.const import PWL_DICT_MALE
-    >>> icl_dict = {body_name: pwl(0.3) for body_name, pwl in PWL_DICT_MALE.items()}
-"""
+PWL_DICT_GENERIC: dict = _get_pwl(_FUNC_DICT_GENERIC, _COND_FUNC_DICT_GENERIC)
+"""Dictionary of piecewise functions for generic posture (standing and seating)."""
 
-PWL_DICT_FEMALE: dict = _get_pwl(_FUNC_DICT_FEMALE, _COND_FUNC_DICT)
-"""
-Dictionary of piecewise functions for female.
+PWL_DICT_STANDING: dict = _get_pwl(_FUNC_DICT_STANDING, _COND_FUNC_DICT_STANDING)
+"""Dictionary of piecewise functions for standing posture."""
 
-Examples:
-    >>> from iclothing.const import PWL_DICT_FEMALE
-    >>> icl_dict = {body_name: pwl(0.3) for body_name, pwl in PWL_DICT_MALE.items()}
-"""
-
-LOWER_LIMIT_DICT_MALE: dict = {
+LOWER_LIMIT_DICT_GENERIC: dict = {
     "Head": 0,
     "Neck": 0,
-    "Chest": 0.35,
-    "Back": 0.27,
-    "Pelvis": 0.91,
+    "Chest": 0.4,
+    "Back": 0.22,
+    "Pelvis": 0.755,
     "LShoulder": 0,
     "LArm": 0,
     "LHand": 0,
     "RShoulder": 0,
     "RArm": 0,
     "RHand": 0,
-    "LThigh": 0.48,
+    "LThigh": 0.28,
     "LLeg": 0,
-    "LFoot": 0.41,
-    "RThigh": 0.48,
+    "LFoot": 0.18,
+    "RThigh": 0.28,
     "RLeg": 0,
-    "RFoot": 0.41
+    "RFoot": 0.18
 }
-"""Dictionary of lower limits of local clothing insulation for male."""
+"""Dictionary of lower limits of local clothing insulation for generic posture (standing and seating)."""
 
-LOWER_LIMIT_DICT_FEMALE: dict = {
+LOWER_LIMIT_DICT_STANDING: dict = {
     "Head": 0,
     "Neck": 0,
-    "Chest": 0.57,
-    "Back": 0.27,
-    "Pelvis": 0.91,
+    "Chest": 0.4,
+    "Back": 0.447,
+    "Pelvis": 1.153,
     "LShoulder": 0,
     "LArm": 0,
     "LHand": 0,
     "RShoulder": 0,
     "RArm": 0,
     "RHand": 0,
-    "LThigh": 0.48,
+    "LThigh": 0.316,
     "LLeg": 0,
-    "LFoot": 0.41,
-    "RThigh": 0.48,
+    "LFoot": 0.211,
+    "RThigh": 0.316,
     "RLeg": 0,
-    "RFoot": 0.41
+    "RFoot": 0.211
 }
-"""Dictionary of lower limits of local clothing insulation for female."""
+"""Dictionary of lower limits of local clothing insulation for standing posture."""
 
 _A_B_DICT: dict = {
-    "Head": (-0.233, 0.625),
+    "Head": (-0.241, 0.612),
     "Neck": (0, 1),
-    "Chest": (-0.120, 0.807),
-    "Back": (-0.089, 0.856),
-    "Pelvis": (-0.092, 0.852),
-    "LShoulder": (-0.137, 0.780),
-    "LArm": (-0.128, 0.794),
+    "Chest": (-0.085, 0.864),
+    "Back": (-0.155, 0.751),
+    "Pelvis": (-0.127, 0.796),
+    "LShoulder": (-0.106, 0.830),
+    "LArm": (-0.046, 0.925),
     "LHand": (0, 1),
-    "RShoulder": (-0.137, 0.780),
-    "RArm": (-0.128, 0.794),
+    "RShoulder": (-0.106, 0.830),
+    "RArm": (-0.046, 0.925),
     "RHand": (0, 1),
-    "LThigh": (-0.116, 0.814),
-    "LLeg": (-0.089, 0.857),
-    "LFoot": (-0.054, 0.913),
-    "RThigh": (-0.116, 0.814),
-    "RLeg": (-0.089, 0.857),
-    "RFoot": (-0.054, 0.913)
+    "LThigh": (-0.050, 0.920),
+    "LLeg": (-0.071, 0.885),
+    "LFoot": (-0.078, 0.875),
+    "RThigh": (-0.050, 0.920),
+    "RLeg": (-0.071, 0.885),
+    "RFoot": (-0.078, 0.875),
 }
 """Dictionary of a and b values of wind correction functions."""
 
 WIND_CORR_DICT: dict = _get_wind_corr_func(_A_B_DICT)
-"""
-Dictionary of wind correction functions.
-
-Examples:
-    >>> from iclothing.const import WIND_CORR_DICT
-    >>> vr = 0.3
-    >>> icl_dict = get_icl_dict(0.3)
-    >>> icl_dict_corr = {body_name: (icl_i * WIND_CORR_DICT[body_name](vr) for body_name, icl_i in icl_dict.items()}
-"""
+"""Dictionary of wind correction functions."""
 
 BSA_DICT: dict = {
     "Head": 0.100,
