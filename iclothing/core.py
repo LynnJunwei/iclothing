@@ -79,6 +79,9 @@ def get_icl_dict(icl: list | np.ndarray | float,
     Get local clothing insulation for each body part.
 
     The calculation models are based on the following papers:
+    Lin, J., Jiang, Y., Xie, Y. et al. A novel method for local clothing
+    insulation prediction to support sustainable building and urban design. Int J Biometeorol (2025).
+    https://doi.org/10.1007/s00484-025-02934-3
 
     Args:
         icl: A number or a list of overall clothing insulation (in clo).
