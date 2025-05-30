@@ -1,8 +1,10 @@
 iclothing
 =======================
 
-iclothing is a Python package designed to estimate local clothing insulation (I<sub>cl,i</sub>) values from a given
-overall clothing insulation (I<sub>cl</sub>). In thermal comfort analysis, assuming uniform insulation across body
+iclothing is a Python package designed to estimate local clothing insulation (I<sub>cl,i</sub>) values at 17 body parts
+from a given overall clothing insulation (I<sub>cl</sub>) for standing and generic postures.
+
+In thermal comfort analysis, assuming uniform insulation across body
 segments can introduce significant errors in predicting heat exchange between the human body and the environment.
 The iclothing package addresses this limitation by implementing regression models derived from 240 real-world clothing
 ensembles, enabling fast and accurate predictions of local insulation values.
@@ -11,27 +13,25 @@ Please cite us if you use this package: Lin, J., Jiang, Y., Xie, Y. et al. A nov
 insulation prediction to support sustainable building and urban design. Int J Biometeorol (2025).
 https://doi.org/10.1007/s00484-025-02934-3
 
-Installation
------
-
-```bash
-pip install iclothing
-```
 
 Documentation
 -----
 
 <https://lynnjunwei.github.io/iclothing/index.html>
 
+
 Dependencies
 -----
 
 - numpy
 
-License
+
+Installation
 -----
 
-GNU General Public License v3.0
+```bash
+pip install iclothing
+```
 
 
 Example
@@ -66,5 +66,12 @@ output:
     'RFoot': 0.425
 }
 ```
+The order of the body parts is consistent with the [JOS-3](https://github.com/TanabeLab/JOS-3) model. 
+
+
+License
+-----
+
+GNU General Public License v3.0
 
 
