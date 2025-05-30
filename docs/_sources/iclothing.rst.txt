@@ -1,15 +1,29 @@
-iclothing.const
+iclothing package
 =================
+
+Submodules
+----------
+
+iclothing.const module
+----------------------
 
 .. automodule:: iclothing.const
    :members:
    :undoc-members:
    :show-inheritance:
 
-iclothing.core
-=================
+iclothing.core module
+---------------------
 
 .. automodule:: iclothing.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: iclothing
    :members:
    :undoc-members:
    :show-inheritance:
