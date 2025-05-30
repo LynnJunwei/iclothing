@@ -11,11 +11,11 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'iclothing'
 DESCRIPTION = 'Package to obtain local clothing insulation for overall clothing insulation.'
-URL = 'junwei.lin@connect.polyu.hk'
-EMAIL = 'me@example.com'
+URL = 'https://github.com/LynnJunwei/iclothing'
+EMAIL = 'junwei.lin@connect.polyu.hk'
 AUTHOR = 'LIN Junwei'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.0'
+VERSION = '1.0.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
