@@ -14,7 +14,7 @@ DESCRIPTION = 'Package to obtain local clothing insulation for overall clothing 
 URL = 'https://github.com/LynnJunwei/iclothing'
 EMAIL = 'junwei.lin@connect.polyu.hk'
 AUTHOR = 'LIN Junwei'
-REQUIRES_PYTHON = '>=3.6.0'
+REQUIRES_PYTHON = '>=3.8.0'
 VERSION = '1.0.0'
 
 # What packages are required for this module to be executed?
@@ -100,9 +100,9 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    # packages=find_packages(where='iclothing', exclude=["test"]),
     # If your package is a single module, use this instead of 'packages':
-    # py_modules=['mypackage'],
+    py_modules=['iclothing'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
@@ -117,7 +117,10 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
