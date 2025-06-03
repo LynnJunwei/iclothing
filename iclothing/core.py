@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from typing import Literal, Optional
+from typing import Literal, Optional, Union
 from types import FunctionType
 
 from iclothing.const import PWL_DICT_GENERIC, PWL_DICT_STANDING, LOWER_LIMIT_DICT_GENERIC, LOWER_LIMIT_DICT_STANDING, WIND_CORR_DICT
@@ -52,9 +52,9 @@ def get_vr(met: float, va: float = 0.1) -> float:
     return vr
 
 
-def _get_icl_i(icl: list | np.ndarray | float,
+def _get_icl_i(icl: Union[list, np.ndarray, float],
                pwl: FunctionType,
-               lower_limit: float) -> np.ndarray | float:
+               lower_limit: float) -> Union[np.ndarray, float]:
     """
     Get local clothing insulation for a specific body part.
 
@@ -71,7 +71,7 @@ def _get_icl_i(icl: list | np.ndarray | float,
     return np.round(icl_i, decimals=3)
 
 
-def get_icl_dict(icl: list | np.ndarray | float,
+def get_icl_dict(icl: Union[list, np.ndarray, float],
                  posture: Literal["generic", "standing"] = "generic",
                  met: Optional[float] = None,
                  va: float = 0.1) -> dict:
